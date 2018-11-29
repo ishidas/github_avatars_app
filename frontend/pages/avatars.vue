@@ -1,14 +1,21 @@
 <template>
   <section>
-    <ul>
-      <li v-for="repo in repositories">
+    <!-- <ul> -->
+      <!-- <li > -->
         <!-- <div class="">
           {{repo.avatar_url}}
         </div> -->
-        <img :src="repo.avatar_url"  alt="" />
-      </li>
+        <b-container fluid class="p-4 bg-dark">
+          <b-row>
+            <b-col sm="1" v-for="repo in repositories">
+              <b-img thumbnail fluid width="50" height="50" :src="repo.avatar_url"  alt="" />
+            </b-col>
+          </b-row>
 
-    </ul>
+      </b-container>
+      <!-- </li> -->
+
+    <!-- </ul> -->
   </section>
 </template>
 
