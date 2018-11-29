@@ -5,9 +5,15 @@ const port = process.env.PORT || 3000
 const githubUri = 'https://api.github.com'
 const axios = require('axios')
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
 app.get('/users', getUsers, (req, res) => {
   res.send(res.filteredData);
 })
+
 
 /***GET users API call using axios ***/
 function getUsers(req, res, next) {
