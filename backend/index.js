@@ -11,12 +11,20 @@ app.get('/users', getUsers, (req, res) => {
 
 /***GET users API call using axios ***/
 function getUsers(req, res, next) {
-  axios.get(`${githubUri}/users`)
+  console.log('hitting');
+  axios.get(`${githubUri}/users?since=1000`)
   .then((response) => {
+    console.log(response);
       res.filteredData = mapReduce(response.data)
       next();
   })
-  .catch((err) => console.log(err))
+  .catch((err) => {
+    if(err) {
+      res.tooManyRequestPerHrError = (err.statusCode === 403) ? err.message : undefined
+      res.error = err
+      next();
+    }
+  })
 }
 
 /***filter out unnecessary data : keeping login,id and avatar_url
