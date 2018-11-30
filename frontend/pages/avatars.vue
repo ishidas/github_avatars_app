@@ -3,8 +3,8 @@
     <b-container fluid class="p-4 bg-dark">
       <b-row ref="rowcontainer">
         <b-col sm="0" v-for="repo in repositories">
-          <b-img @mouseover="followers && repo.followers_url ? mouseOverHandler(repo.login) : undefined" thumbnail fluid width="50" height="50" :src="repo.avatar_url"  alt="github user thumbnail" />
-          <div v-if="followers && (mouseOverActive === repo.login)" :class="{ 'popup-show' : (mouseOverActive === repo.login), 'popup-hide': mouseOverActive === ''}" @mouseleave="mouseLeaveHandler()">
+          <b-img :class="{'hover-img': (mouseOverActive !== '') && (mouseOverActive === repo.login)}" @mouseover="followers && repo.followers_url ? mouseOverHandler(repo.login) : undefined" @mouseleave="mouseLeaveHandler()" thumbnail fluid width="50" height="50" :src="repo.avatar_url"  alt="github user thumbnail" />
+          <div v-if="followers && (mouseOverActive === repo.login)" :class="{ 'popup-show' : (mouseOverActive === repo.login), 'popup-hide': mouseOverActive === ''}">
             <ul>
               <li v-for="follower in followers">{{follower.login}}, </li>
             </ul>
@@ -81,7 +81,7 @@ export default {
       axios.get(`http://localhost:3000/users/${userLogin}/followers`)
       .then( repoData  => {
         localStorage.setItem(userLogin, JSON.stringify(repoData.data))
-        this.followers = repoData.data;
+        this.followers = repoData.data
         this.mouseOverActive = userLogin
       })
       .catch( err => {
@@ -96,18 +96,18 @@ export default {
         this.followers = JSON.parse(localStorage.getItem(login))
         this.mouseOverActive = login
       } else {
-        this.getFollowers(login)
+        this.getFollowers.bind(this, login).call()
       }
     },
     mouseLeaveHandler() {
-      console.log('MOUSE LEAVE');
       this.mouseOverActive = '';
       this.followers = {}
     }
   },
   watch: {
     mouseOverActive() {
-      return this.mouseOverActive
+      this.mouseOverActive = this.mouseOverActive
+      this.followers = this.followers
     },
   }
 }
@@ -122,9 +122,7 @@ export default {
     height: auto;
     background: white;
     position: absolute;
-    overflow: scroll;
   }
-
   .popup-show > ul > li {
     display: inline-block;
     list-style: none;
@@ -133,5 +131,7 @@ export default {
     display: none;
     list-style: none;
   }
-
+  .hover-img:hover {
+    border: blue solid 2px;
+  }
 </style>
