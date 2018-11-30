@@ -1,4 +1,4 @@
-# github_avatars_app
+# github avatars app
 
 ### How to Run the App
 1. pull down the repository
