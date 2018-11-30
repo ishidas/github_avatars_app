@@ -5,9 +5,11 @@
 2. npm install in both frontend and backend
 
 To start frontend
-  `npm run dev
+  `npm run dev 
+  //runs on port 8080
   `
 
 To start backend
   `npm start
+  //runs on port 3000
   `
