@@ -4,12 +4,12 @@
 1. pull down the repository
 2. npm install in both frontend and backend
 
-To start frontend
+To start frontend (runs on port 8080)
+
   `npm run dev 
-  //runs on port 8080
   `
 
-To start backend
+To start backend (runs on port 3000)
+
   `npm start
-  //runs on port 3000
   `
