@@ -48,7 +48,6 @@ function getMaxNumOfAvatarsPerPage(req, res, count,last, next) {
   .catch((err) => {
     if(err) {
       res.error = err
-
       console.log('err ' + res.error);
       next(err);
     }

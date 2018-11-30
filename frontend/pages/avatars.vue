@@ -72,7 +72,6 @@ export default {
           if(err) {
             console.log('Errrrr ' + err);
             this.error = err
-            // alert('Oops, someting went wrong..')
           }
 
       })
